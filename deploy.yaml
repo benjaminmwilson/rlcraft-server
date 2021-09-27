@@ -1,0 +1,56 @@
+# https://medium.com/google-cloud/kubernetes-110-your-first-deployment-bf123c1d3f8
+# https://medium.com/google-cloud/kubernetes-120-networking-basics-3b903f13093a
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rlcraft-server-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rlcraft-server
+  template:
+    metadata:
+      labels:
+        app: rlcraft-server
+    spec:
+      containers:
+      - name: rlcraft-server-container
+        image: bmwilson74/rlcraft-server:1.12.2
+        volumeMounts:
+          - name: rlcraft-server-pvc
+            mountPath: /data
+        ports:
+        - containerPort: 25565
+          name: rlcraft-server
+      volumes:
+        - name: rlcraft-server-pvc
+          persistentVolumeClaim:
+            claimName: rlcraft-server-pvc
+      nodeSelector:
+        cloud.google.com/gke-nodepool: game-servers-pool
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: rlcraft-server-service
+spec:
+  selector:
+    app: rlcraft-server
+  ports:
+  - protocol: TCP
+    targetPort: 25565
+    port: 25565
+    name: rlcraft-server
+  type: LoadBalancer
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: rlcraft-server-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
