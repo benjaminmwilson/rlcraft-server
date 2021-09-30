@@ -39,6 +39,7 @@ helm create rlc-helm
 helm install xyz .
 helm list
 helm get manifest xyz
+helm upgrade xyz .
 helm uninstall xyz
 helm delete xyz
 ```

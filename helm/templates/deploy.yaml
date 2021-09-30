@@ -6,11 +6,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: rls-{{ .Release.Name }}
+      app: rlcraft-server-{{ .Release.Name }}
   template:
     metadata:
       labels:
-        app: rls-{{ .Release.Name }}
+        app: rlcraft-server-{{ .Release.Name }}
     spec:
       containers:
       - name: rlcraft-server
@@ -33,7 +33,7 @@ metadata:
   name: rlcraft-server-{{ .Release.Name }}
 spec:
   selector:
-    app: rls-{{ .Release.Name }}
+    app: rlcraft-server-{{ .Release.Name }}
   ports:
   - protocol: TCP
     targetPort: 25565
