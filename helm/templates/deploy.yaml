@@ -16,12 +16,12 @@ spec:
       - name: rls-container-{{ .Release.Name }}
         image: bmwilson74/rlcraft-server:1.12.2
         volumeMounts:
-          - name: rls-pvc-{{ .Release.Name }}
+          - name: pvc
             mountPath: /data
         ports:
         - containerPort: 25565
       volumes:
-        - name: rls-pvc-{{ .Release.Name }}
+        - name: pvc
           persistentVolumeClaim:
             claimName: rlcraft-server-{{ .Release.Name }}
       nodeSelector:
