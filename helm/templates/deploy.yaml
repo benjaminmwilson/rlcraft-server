@@ -24,14 +24,14 @@ spec:
       volumes:
         - name: rls-pvc-{{ .Release.Name }}
           persistentVolumeClaim:
-            claimName: rls-pvc-{{ .Release.Name }}
+            claimName: rlcraft-server-{{ .Release.Name }}
       nodeSelector:
         cloud.google.com/gke-nodepool: game-servers-pool
 ---
 kind: Service
 apiVersion: v1
 metadata:
-  name: rls-service-{{ .Release.Name }}
+  name: rlcraft-server-{{ .Release.Name }}
 spec:
   selector:
     app: rls-{{ .Release.Name }}
@@ -45,7 +45,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: rls-pvc-{{ .Release.Name }}
+  name: rlcraft-server-{{ .Release.Name }}
 spec:
   accessModes:
     - ReadWriteOnce
