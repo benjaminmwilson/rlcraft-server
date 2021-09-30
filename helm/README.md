@@ -1,11 +1,6 @@
 
-```shell
-docker build . -t bmwilson74/rlcraft-server
-docker run -v $(pwd)/data:/data -ti bmwilson74/rlcraft-server
-```
 
-https://medium.com/google-cloud/kubernetes-110-your-first-deployment-bf123c1d3f8
-https://medium.com/google-cloud/kubernetes-120-networking-basics-3b903f13093a
+## gcloud
 
 ```shell
 gcloud auth login
@@ -30,6 +25,25 @@ gcloud container node-pools create def-pool --cluster game-servers-cluster --mac
 gcloud container clusters resize game-servers-cluster --node-pool default-pool --num-nodes 0  --zone us-west1-a
 ```
 
+
+# kubectl
+
 ```shell
-kubectl apply -f deploy.yaml
+kubectl apply -f templates/deploy.yaml
 ```
+
+# helm
+
+```shell
+helm create rlc-helm
+helm install xyz .
+helm list
+helm get manifest xyz
+helm uninstall xyz
+helm delete xyz
+```
+
+## Related Docs
+
+https://medium.com/google-cloud/kubernetes-110-your-first-deployment-bf123c1d3f8
+https://medium.com/google-cloud/kubernetes-120-networking-basics-3b903f13093a
