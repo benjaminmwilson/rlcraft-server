@@ -1,9 +1,7 @@
-# https://medium.com/google-cloud/kubernetes-110-your-first-deployment-bf123c1d3f8
-# https://medium.com/google-cloud/kubernetes-120-networking-basics-3b903f13093a
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: rls-deployment-{{ .Release.Name }}
+  name: rlcraft-server-{{ .Release.Name }}
 spec:
   replicas: 1
   selector:
