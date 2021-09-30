@@ -3,51 +3,51 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: rlcraft-server-deployment
+  name: rls-deployment-{{ .Release.Name }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: rlcraft-server
+      app: rls-{{ .Release.Name }}
   template:
     metadata:
       labels:
-        app: rlcraft-server
+        app: rls-{{ .Release.Name }}
     spec:
       containers:
-      - name: rlcraft-server-container
+      - name: rls-container-{{ .Release.Name }}
         image: bmwilson74/rlcraft-server:1.12.2
         volumeMounts:
-          - name: rlcraft-server-pvc
+          - name: rls-pvc-{{ .Release.Name }}
             mountPath: /data
         ports:
         - containerPort: 25565
-          name: rlcraft-server
+          name: rls-{{ .Release.Name }}
       volumes:
-        - name: rlcraft-server-pvc
+        - name: rls-pvc-{{ .Release.Name }}
           persistentVolumeClaim:
-            claimName: rlcraft-server-pvc
+            claimName: rls-pvc-{{ .Release.Name }}
       nodeSelector:
         cloud.google.com/gke-nodepool: game-servers-pool
 ---
 kind: Service
 apiVersion: v1
 metadata:
-  name: rlcraft-server-service
+  name: rls-service-{{ .Release.Name }}
 spec:
   selector:
-    app: rlcraft-server
+    app: rls-{{ .Release.Name }}
   ports:
   - protocol: TCP
     targetPort: 25565
     port: 25565
-    name: rlcraft-server
+    name: rls-{{ .Release.Name }}
   type: LoadBalancer
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: rlcraft-server-pvc
+  name: rls-pvc-{{ .Release.Name }}
 spec:
   accessModes:
     - ReadWriteOnce
