@@ -13,7 +13,7 @@ spec:
         app: rls-{{ .Release.Name }}
     spec:
       containers:
-      - name: rls-container-{{ .Release.Name }}
+      - name: rlcraft-server
         image: bmwilson74/rlcraft-server:1.12.2
         volumeMounts:
           - name: pvc
