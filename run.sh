@@ -23,14 +23,14 @@ if [ ! -f "/data/eula.txt" ]; then
     pkill java
     sleep 20s
     
-    echo -e "\e[1;33minstalling rlcraft mods\e[0m"
-    mkdir -p /tmp/rlcraft-mod
-    curl -s https://media.forgecdn.net/files/2935/323/RLCraft+Server+Pack+1.12.2+-+Beta+v2.8.2.zip -o /tmp/rlcraft.zip
-    unzip -q /tmp/rlcraft.zip -d /tmp/rlcraft-mod
+    echo -e "\e[1;33minstalling skyfactory4 mods\e[0m"
+    mkdir -p /tmp/skyfactory4-mod
+    curl -s https://media.forgecdn.net/files/3012/800/SkyFactory-4_Server_4.2.2.zip -o /tmp/skyfactory4.zip
+    unzip -q /tmp/skyfactory4.zip -d /tmp/skyfactory4-mod
     
-    find /tmp/rlcraft-mod -maxdepth 1 -mindepth 1 -type d -exec cp -r {} . \;
-    cp /tmp/rlcraft-mod/options.txt .
-    rm -rf /tmp/rlcraft-mod /tmp/rlcraft.zip
+    find /tmp/skyfactory4-mod -maxdepth 1 -mindepth 1 -type d -exec cp -r {} . \;
+    cp /tmp/skyfactory4-mod/options.txt .
+    rm -rf /tmp/skyfactory4-mod /tmp/skyfactory4.zip
         
     popd
     
